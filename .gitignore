@@ -114,3 +114,6 @@ out/
 # VS Code
 .history/
 *.code-workspace
+
+# COntenedores Log
+Server/logs
