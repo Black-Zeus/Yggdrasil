@@ -45,7 +45,7 @@ export const Sidebar = () => {
       {/* Collapse Button */}
       <button 
         onClick={toggleSidebar}
-        className={`absolute top-1/2 -right-3 w-6 h-10 bg-sidebar dark:bg-sidebar-dark rounded-r flex items-center justify-center cursor-pointer shadow-md z-30 text-text-sidebar text-xs transform -translate-y-1/2 transition-transform duration-300 ${
+        className={`absolute top-[40px]  -right-7 w-8 h-[60px] bg-sidebar dark:bg-sidebar-dark rounded-r flex items-center justify-center cursor-pointer shadow-md z-30 text-text-sidebar text-xs transform -translate-y-1/2 transition-transform duration-300 ${
           collapsed ? 'rotate-180' : ''
         }`}
         aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}

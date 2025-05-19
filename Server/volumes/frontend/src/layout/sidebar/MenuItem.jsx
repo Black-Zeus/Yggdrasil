@@ -11,12 +11,22 @@ import { useLayoutStore } from '../../store/layoutStore';
 const MenuItem = ({ item }) => {
   const { collapsed } = useLayoutStore();
   const [isOpen, setIsOpen] = useState(item.open || false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const hasSubmenu = item.submenu && item.submenu.length > 0;
   
-  // Cerrar submenús cuando el sidebar está colapsado
+  // Efecto para manejar el estado del submenú cuando el sidebar cambia
   useEffect(() => {
+    // Cuando comienza a colapsarse, marcamos que está en transición
     if (collapsed) {
+      setIsTransitioning(true);
       setIsOpen(false);
+      
+      // Después de la transición, restauramos el estado
+      const timer = setTimeout(() => {
+        setIsTransitioning(false);
+      }, 300); // Debe coincidir con la duración de la transición del sidebar
+      
+      return () => clearTimeout(timer);
     } else if (item.open) {
       setIsOpen(true);
     }
@@ -32,7 +42,7 @@ const MenuItem = ({ item }) => {
   return (
     <>
       <li 
-        className={`flex items-center px-3 py-3 rounded-menu-item cursor-pointer mb-1 relative transition-colors duration-300 ${
+        className={`group flex items-center px-3 py-3 rounded-menu-item cursor-pointer mb-1 relative transition-colors duration-300 ${
           item.active ? 'bg-sidebar-active dark:bg-sidebar-dark-active' : 'hover:bg-hover-sidebar'
         } ${
           collapsed ? 'justify-center' : ''
@@ -59,24 +69,27 @@ const MenuItem = ({ item }) => {
           </div>
         )}
         
-        {/* Tooltip for collapsed mode */}
+        {/* Tooltip para modo colapsado - visible solo en hover */}
         {collapsed && (
-          <div className="absolute left-full top-1/2 transform -translate-y-1/2 bg-gray-800 text-white py-2 px-3 rounded text-sm opacity-0 invisible transition-all duration-300 whitespace-nowrap shadow-md pointer-events-none ml-2.5 z-40 tooltip-sidebar">
+          <div className="absolute left-full top-1/2 transform -translate-y-1/2 bg-gray-800 text-white py-2 px-3 rounded text-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 whitespace-nowrap shadow-md pointer-events-none ml-2.5 z-40">
             {item.text}
             <div className="absolute left-0 top-1/2 transform -translate-x-1 -translate-y-1/2 border-solid border-transparent border-r-gray-800 border-[5px]"></div>
           </div>
         )}
       </li>
       
-      {/* Submenu */}
+      {/* Submenu - Oculto inmediatamente durante la transición */}
       {hasSubmenu && (
         <ul className={`transition-all duration-300 overflow-hidden ${
-          collapsed 
-            ? 'absolute left-full top-0 ml-0 bg-sidebar dark:bg-sidebar-dark rounded-r-lg shadow-md p-2 w-[180px] opacity-0 invisible hover:opacity-100 hover:visible submenu-hover' 
-            : 'ml-10 max-h-0'
-        } ${
-          isOpen && !collapsed ? 'max-h-[500px]' : ''
-        }`}>
+          isTransitioning 
+            ? 'invisible opacity-0 absolute' // Oculto inmediatamente durante la transición
+            : collapsed 
+              ? 'absolute left-full top-0 ml-0 bg-sidebar dark:bg-sidebar-dark rounded-r-lg shadow-md p-2 w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible' 
+              : 'ml-10 max-h-0'
+          } ${
+            isOpen && !collapsed ? 'max-h-[500px]' : ''
+          }`}
+        >
           {item.submenu.map(subItem => (
             <SubmenuItem 
               key={subItem.id} 
@@ -85,26 +98,6 @@ const MenuItem = ({ item }) => {
           ))}
         </ul>
       )}
-      
-      {/* CSS para mostrar submenú en hover cuando está colapsado */}
-      <style jsx>{`
-        .tooltip-sidebar {
-          position: absolute;
-          z-index: 40;
-        }
-        
-        li:hover .tooltip-sidebar {
-          opacity: 1;
-          visibility: visible;
-        }
-        
-        li:hover + .submenu-hover,
-        .submenu-hover:hover {
-          max-height: 500px;
-          opacity: 1;
-          visibility: visible;
-        }
-      `}</style>
     </>
   );
 };
