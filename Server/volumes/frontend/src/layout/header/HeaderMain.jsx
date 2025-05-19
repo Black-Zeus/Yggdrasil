@@ -1,14 +1,22 @@
-import React from 'react';
+// src/layout/header/HeaderMain.jsx
+import React, { useEffect } from 'react';
 import SearchBar from './SearchBar';
 import NotificationButton from './NotificationButton';
 import UserDropdown from './UserDropdown';
-import { useLayoutStore } from '../../store/layoutStore';
+import { useMessageStore, useNotificationStore } from '../../store';
 
 /**
  * HeaderMain - Componente para la sección principal del header
  */
 const HeaderMain = () => {
-  const { collapsed } = useLayoutStore();
+  const { loadMessages } = useMessageStore();
+  const { loadNotifications } = useNotificationStore();
+  
+  // Cargar datos al montar el componente
+  useEffect(() => {
+    loadMessages();
+    loadNotifications();
+  }, [loadMessages, loadNotifications]);
   
   return (
     <div className="flex items-center justify-between px-8 h-header border-b border-border dark:border-border-dark transition-colors duration-300">
@@ -20,17 +28,11 @@ const HeaderMain = () => {
       
       {/* Acciones del header */}
       <div className="flex items-center gap-5">
-        {/* Notificaciones de mensajes */}
-        <NotificationButton 
-          type="message" 
-          icon="📩" 
-        />
+        {/* Botón de mensajes */}
+        <NotificationButton type="message" />
         
-        {/* Notificaciones de alertas */}
-        <NotificationButton 
-          type="alert" 
-          icon="🔔" 
-        />
+        {/* Botón de notificaciones */}
+        <NotificationButton type="notification" />
         
         {/* Menú desplegable del usuario */}
         <UserDropdown />

@@ -1,4 +1,6 @@
+// src/layout/header/SearchBar.jsx
 import React, { useState } from 'react';
+import IconResolve_RI from '../../components/atoms/IconResolve_RI';
 
 /**
  * SearchBar - Componente para la barra de búsqueda
@@ -13,7 +15,9 @@ const SearchBar = () => {
   
   return (
     <div className="flex items-center bg-sidebar-active dark:bg-sidebar-dark-active rounded-full px-4 py-2 w-[300px] text-white transition-colors duration-300">
-      <span className="mr-2">🔍</span>
+      <span className="mr-2">
+        <IconResolve_RI name="search" size={16} />
+      </span>
       <input 
         type="text" 
         value={searchTerm}

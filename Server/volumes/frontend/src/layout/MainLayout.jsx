@@ -1,7 +1,8 @@
+// src/layout/MainLayout.jsx
 import React, { useEffect } from 'react';
 import { Sidebar } from './sidebar/Sidebar';
 import { Header } from './header/Header';
-import { useLayoutStore } from '../store/layoutStore';
+import { useSidebarStore, useThemeStore } from '../store';
 
 /**
  * MainLayout - Componente principal para la estructura de la aplicación
@@ -10,12 +11,13 @@ import { useLayoutStore } from '../store/layoutStore';
  * @param {React.ReactNode} props.children - Contenido a renderizar en el área principal
  */
 const MainLayout = ({ children }) => {
-  // Utilizamos el store de Zustand para gestionar el estado del layout
-  const { 
-    collapsed, 
-    darkMode, 
-    initializeTheme
-  } = useLayoutStore();
+  // Utilizamos los stores específicos
+  const { collapsed } = useSidebarStore();
+  const { darkMode, initializeTheme } = useThemeStore();
+
+  // Valores fijos para los anchos del sidebar
+  const expandedWidth = 250;
+  const collapsedWidth = 70;
 
   // Inicializar el tema desde localStorage al montar el componente
   useEffect(() => {
@@ -32,23 +34,23 @@ const MainLayout = ({ children }) => {
   }, [darkMode]);
 
   return (
-    <div className="flex min-h-screen bg-background dark:bg-background-dark text-text dark:text-text-dark transition-colors duration-300">
+    <div className="flex min-h-screen w-full overflow-x-hidden bg-background dark:bg-background-dark text-text dark:text-text-dark transition-colors duration-300">
       {/* Sidebar Component */}
       <Sidebar />
       
-      {/* Main Content Area */}
+      {/* Main Content Area - Con espacio reservado para el sidebar */}
       <div 
-        className={`flex flex-col flex-1 transition-all duration-300 ${
-          collapsed 
-            ? 'ml-sidebar-collapsed w-[calc(100%-70px)]' 
-            : 'ml-sidebar w-[calc(100%-250px)]'
-        }`}
+        className="flex flex-col flex-1 min-h-screen overflow-x-hidden transition-all duration-300 ease-in-out"
+        style={{ 
+          marginLeft: collapsed ? `${collapsedWidth}px` : `${expandedWidth}px`,
+          width: `calc(100% - ${collapsed ? collapsedWidth : expandedWidth}px)` 
+        }}
       >
         {/* Header Component */}
         <Header />
         
         {/* Content */}
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-8 overflow-x-hidden">
           {children}
         </main>
       </div>

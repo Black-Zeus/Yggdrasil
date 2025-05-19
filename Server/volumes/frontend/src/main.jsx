@@ -1,8 +1,9 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import  App  from "./App";
+import App from "./App";
 import "./index.css";
+import ErrorBoundary from "./components/errorBoundary/ErrorBoundary";
 
 // Configuración del enrutador
 const router = createBrowserRouter(
@@ -21,5 +22,9 @@ const router = createBrowserRouter(
 
 // Renderiza la aplicación
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <React.StrictMode>
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
+  </React.StrictMode>
 );

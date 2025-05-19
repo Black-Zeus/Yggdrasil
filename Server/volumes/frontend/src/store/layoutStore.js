@@ -1,5 +1,7 @@
-// src/store/layoutStore.js
+// src/store/layoutStore.js - Actualizado para manejar mensajes y notificaciones
 import { create } from 'zustand';
+import messages from '../../dummyData/messages.json'
+import notifications from '../../dummyData/notifications.json';
 
 export const useLayoutStore = create((set, get) => ({
   // Estado de UI
@@ -8,9 +10,11 @@ export const useLayoutStore = create((set, get) => ({
   
   // Estado de datos
   currentUser: null,
+  messages: [],
   notifications: [],
   isDataLoaded: {
     user: false,
+    messages: false,
     notifications: false,
   },
   
@@ -52,96 +56,91 @@ export const useLayoutStore = create((set, get) => ({
     }
   },
   
-  // Cargar datos del usuario - optimizado para prevenir re-renders
+  // Cargar datos del usuario
   loadCurrentUser: async () => {
     // Verificar si los datos ya están cargados
     if (get().isDataLoaded.user) return;
     
     try {
       // En un entorno real, esto sería una llamada a API
-      const userResponse = await import('../../dummyData/currentUser.json');
+      const userResponse = {
+        id: 'user-001',
+        name: 'Juan Pérez',
+        email: 'juan.perez@aqumex.com',
+        role: 'Administrador',
+        avatar: '/api/placeholder/36/36',
+        lastLogin: '2025-05-17T08:30:00.000Z'
+      };
       
       // Actualizar estado en una sola operación para minimizar renders
       set(state => ({
-        currentUser: userResponse.default,
+        currentUser: userResponse,
         isDataLoaded: {
           ...state.isDataLoaded,
           user: true
         }
       }));
       
-      return userResponse.default;
+      return userResponse;
     } catch (error) {
       console.error('Error loading user data:', error);
-      // No actualizar el estado en caso de error para evitar renders
       return null;
     }
   },
   
-  // Recargar datos del usuario (forzar recarga)
-  reloadUserData: async () => {
-    try {
-      const userResponse = await import('../../dummyData/currentUser.json?t=' + Date.now());
-      
-      set({
-        currentUser: userResponse.default,
-        isDataLoaded: {
-          ...get().isDataLoaded,
-          user: true
-        }
-      });
-      
-      return userResponse.default;
-    } catch (error) {
-      console.error('Error reloading user data:', error);
-      return null;
-    }
-  },
-  
-  // Cargar notificaciones - optimizado para prevenir re-renders
-  loadNotifications: async () => {
+  // Cargar mensajes
+  loadMessages: async () => {
     // Verificar si los datos ya están cargados
-    if (get().isDataLoaded.notifications) return;
+    if (get().isDataLoaded.messages) return get().messages;
     
     try {
-      // Simulamos la carga desde dummyData
-      const notificationsResponse = await import('../../dummyData/notifications.json');
-      
-      // Actualizar estado en una sola operación
+      // Simulamos la carga desde nuestro JSON local
       set(state => ({
-        notifications: notificationsResponse.default,
+        messages: messages,
+        isDataLoaded: {
+          ...state.isDataLoaded,
+          messages: true
+        }
+      }));
+      
+      return messages;
+    } catch (error) {
+      console.error('Error loading messages:', error);
+      return [];
+    }
+  },
+  
+  // Cargar notificaciones
+  loadNotifications: async () => {
+    // Verificar si los datos ya están cargados
+    if (get().isDataLoaded.notifications) return get().notifications;
+    
+    try {
+      // Simulamos la carga desde nuestro JSON local
+      set(state => ({
+        notifications: notifications,
         isDataLoaded: {
           ...state.isDataLoaded,
           notifications: true
         }
       }));
       
-      return notificationsResponse.default;
+      return notifications;
     } catch (error) {
       console.error('Error loading notifications:', error);
-      // No actualizar el estado en caso de error para evitar renders
       return [];
     }
   },
   
-  // Recargar notificaciones (forzar recarga)
-  reloadNotifications: async () => {
-    try {
-      const notificationsResponse = await import('../../dummyData/notifications.json?t=' + Date.now());
-      
-      set({
-        notifications: notificationsResponse.default,
-        isDataLoaded: {
-          ...get().isDataLoaded,
-          notifications: true
-        }
-      });
-      
-      return notificationsResponse.default;
-    } catch (error) {
-      console.error('Error reloading notifications:', error);
-      return [];
-    }
+  // Marcar mensaje como leído
+  markMessageAsRead: (messageId) => {
+    set(state => ({
+      messages: state.messages.map(msg => 
+        msg.id === messageId 
+          ? { ...msg, read: true } 
+          : msg
+      )
+    }));
   },
   
   // Marcar notificación como leída
@@ -155,6 +154,16 @@ export const useLayoutStore = create((set, get) => ({
     }));
   },
   
+  // Marcar todos los mensajes como leídos
+  markAllMessagesAsRead: () => {
+    set(state => ({
+      messages: state.messages.map(msg => ({ 
+        ...msg, 
+        read: true 
+      }))
+    }));
+  },
+  
   // Marcar todas las notificaciones como leídas
   markAllNotificationsAsRead: () => {
     set(state => ({
@@ -165,65 +174,21 @@ export const useLayoutStore = create((set, get) => ({
     }));
   },
   
+  // Obtener contador de mensajes no leídos
+  getUnreadMessagesCount: () => {
+    const { messages } = get();
+    return messages.filter(msg => !msg.read).length;
+  },
+  
   // Obtener contador de notificaciones no leídas
-  getUnreadCount: (type = null) => {
+  getUnreadNotificationsCount: () => {
     const { notifications } = get();
-    
-    if (!notifications || notifications.length === 0) {
-      return 0;
-    }
-    
-    // Si se especifica un tipo, filtrar por ese tipo
-    if (type) {
-      return notifications.filter(notif => !notif.read && notif.type === type).length;
-    }
-    
-    // De lo contrario, contar todas las no leídas
     return notifications.filter(notif => !notif.read).length;
   },
   
-  // Obtener notificaciones filtradas por tipo
-  getNotificationsByType: (type) => {
-    const { notifications } = get();
-    
-    if (!notifications || notifications.length === 0) {
-      return [];
-    }
-    
-    return notifications.filter(notif => notif.type === type);
-  },
-  
-  // Gestión del perfil de usuario
-  getUserProfile: () => {
-    const { currentUser } = get();
-    
-    if (!currentUser) {
-      return null;
-    }
-    
-    return {
-      name: currentUser.name || 'Usuario',
-      avatar: currentUser.avatar || null,
-      role: currentUser.role || 'Usuario',
-      email: currentUser.email || '',
-    };
-  },
-  
-  // Verificar si ambos datos están cargados
+  // Verificar si todos los datos están cargados
   isAllDataLoaded: () => {
     const { isDataLoaded } = get();
-    return isDataLoaded.user && isDataLoaded.notifications;
-  },
-  
-  // Resetear estado (útil para logout)
-  resetState: () => {
-    set({
-      currentUser: null,
-      notifications: [],
-      isDataLoaded: {
-        user: false,
-        notifications: false,
-      }
-    });
+    return isDataLoaded.user && isDataLoaded.messages && isDataLoaded.notifications;
   }
 }));

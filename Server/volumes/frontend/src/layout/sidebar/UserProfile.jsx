@@ -1,11 +1,16 @@
+// src/layout/sidebar/UserProfile.jsx
 import React from 'react';
-import { useLayoutStore } from '../../store/layoutStore';
+import { useSidebarStore, useUserStore } from '../../store';
+import IconResolve_RI from '../../components/atoms/IconResolve_RI';
 
 /**
  * UserProfile - Componente para mostrar el perfil del usuario en el sidebar
+ * @param {Object} props
+ * @param {boolean} props.textVisible - Si el texto debe estar visible
  */
-const UserProfile = () => {
-  const { collapsed, currentUser } = useLayoutStore();
+const UserProfile = ({ textVisible = true }) => {
+  const { collapsed } = useSidebarStore();
+  const { currentUser } = useUserStore();
   
   if (!currentUser) return null;
   
@@ -21,12 +26,12 @@ const UserProfile = () => {
             className="w-full h-full object-cover"
           />
         ) : (
-          currentUser.name.charAt(0)
+          <IconResolve_RI name="user" size={20} />
         )}
       </div>
       
-      <div className={`flex flex-col transition-opacity duration-300 ${
-        collapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'
+      <div className={`flex flex-col transition-all duration-300 ${
+        !textVisible ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'
       }`}>
         <div className="font-bold text-[0.9rem]">{currentUser.name}</div>
         <div className="text-[0.8rem] text-white/60">{currentUser.role}</div>

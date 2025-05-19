@@ -1,62 +1,82 @@
 [
-    {
-      "id": 1,
-      "type": "message",
-      "sender": "Carlos Rodríguez",
-      "content": "Nuevo mensaje sobre el proyecto XYZ",
-      "timestamp": "2025-05-18T09:15:00Z",
-      "read": false
-    },
-    {
-      "id": 2,
-      "type": "message",
-      "sender": "María González",
-      "content": "Actualización del informe trimestral",
-      "timestamp": "2025-05-17T14:30:00Z",
-      "read": false
-    },
-    {
-      "id": 3,
-      "type": "message",
-      "sender": "Sistema",
-      "content": "Mantenimiento programado para esta noche",
-      "timestamp": "2025-05-16T17:45:00Z",
-      "read": false
-    },
-    {
-      "id": 4,
-      "type": "alert",
-      "title": "Recordatorio de reunión",
-      "content": "Reunión de equipo en 30 minutos",
-      "timestamp": "2025-05-18T10:30:00Z",
-      "priority": "high",
-      "read": false
-    },
-    {
-      "id": 5,
-      "type": "alert",
-      "title": "Actualización del sistema",
-      "content": "Nueva versión disponible (v2.5.0)",
-      "timestamp": "2025-05-17T08:00:00Z",
-      "priority": "medium",
-      "read": false
-    },
-    {
-      "id": 6,
-      "type": "alert",
-      "title": "Completar perfil",
-      "content": "Por favor, actualice su información de perfil",
-      "timestamp": "2025-05-15T11:20:00Z",
-      "priority": "low",
-      "read": true
-    },
-    {
-      "id": 7,
-      "type": "alert",
-      "title": "Límite de almacenamiento",
-      "content": "Se está acercando al límite de almacenamiento",
-      "timestamp": "2025-05-14T16:45:00Z",
-      "priority": "medium",
-      "read": true
-    }
-  ]
+  {
+    "id": "notif-001",
+    "title": "Reunión semanal",
+    "content": "Reunión de equipo programada para hoy a las 15:00.",
+    "timestamp": "2025-05-18T08:00:00.000Z",
+    "read": false,
+    "type": "event",
+    "priority": "high",
+    "icon": "time"
+  },
+  {
+    "id": "notif-002",
+    "title": "Actualización de sistema",
+    "content": "Nueva versión 2.5.1 instalada correctamente.",
+    "timestamp": "2025-05-17T23:15:30.000Z",
+    "read": false,
+    "type": "system",
+    "priority": "normal",
+    "icon": "refresh"
+  },
+  {
+    "id": "notif-003",
+    "title": "Tarea asignada",
+    "content": "Se te ha asignado la tarea 'Revisión de reportes financieros'.",
+    "timestamp": "2025-05-17T14:30:45.000Z",
+    "read": false,
+    "type": "task",
+    "priority": "medium",
+    "icon": "clipboard"
+  },
+  {
+    "id": "notif-004",
+    "title": "Recordatorio",
+    "content": "Entrega de documentación pendiente para el proyecto Aqua-104.",
+    "timestamp": "2025-05-17T10:20:15.000Z",
+    "read": true,
+    "type": "reminder",
+    "priority": "medium",
+    "icon": "bell"
+  },
+  {
+    "id": "notif-005",
+    "title": "Alerta de seguridad",
+    "content": "Se detectó un intento de inicio de sesión desde una ubicación desconocida.",
+    "timestamp": "2025-05-16T18:45:10.000Z",
+    "read": false,
+    "type": "security",
+    "priority": "high",
+    "icon": "shield"
+  },
+  {
+    "id": "notif-006",
+    "title": "Nuevo comentario",
+    "content": "Ana Martínez comentó en el documento 'Estrategia Q2'.",
+    "timestamp": "2025-05-16T15:10:22.000Z",
+    "read": true,
+    "type": "social",
+    "priority": "low",
+    "icon": "chat"
+  },
+  {
+    "id": "notif-007",
+    "title": "Pago procesado",
+    "content": "El pago mensual de subscripción ha sido procesado correctamente.",
+    "timestamp": "2025-05-15T09:30:00.000Z",
+    "read": true,
+    "type": "billing",
+    "priority": "normal",
+    "icon": "money"
+  },
+  {
+    "id": "notif-008",
+    "title": "Nuevo reporte disponible",
+    "content": "El reporte mensual de rendimiento ya está disponible para revisión.",
+    "timestamp": "2025-05-14T11:00:00.000Z",
+    "read": true,
+    "type": "report",
+    "priority": "normal",
+    "icon": "file-chart"
+  }
+]

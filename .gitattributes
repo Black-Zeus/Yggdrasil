@@ -1,0 +1,55 @@
+# Forcing consistent text encoding and line endings
+* text=auto eol=lf
+
+# Handle line endings explicitly for common file types
+*.js     text eol=lf
+*.jsx    text eol=lf
+*.ts     text eol=lf
+*.tsx    text eol=lf
+*.json   text eol=lf
+*.css    text eol=lf
+*.scss   text eol=lf
+*.md     text eol=lf
+*.html   text eol=lf
+*.yml    text eol=lf
+*.yaml   text eol=lf
+*.sh     text eol=lf
+*.env    text eol=lf
+
+# Prevent Git from normalizing binary files
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.svg    binary
+*.ico    binary
+*.woff   binary
+*.woff2  binary
+*.ttf    binary
+*.eot    binary
+*.otf    binary
+*.pdf    binary
+*.mp4    binary
+*.mp3    binary
+*.webm   binary
+
+# Make shell scripts executable when checked out on UNIX
+*.sh     text eol=lf
+*.sh     diff
+*.sh     linguist-language=Shell
+
+# Ensure Docker-related files are detected properly
+Dockerfile* linguist-language=Dockerfile
+*.dockerignore text
+
+# Force GitHub to correctly detect the main language if needed
+*.ts linguist-language=TypeScript
+*.tsx linguist-language=TypeScript
+
+# Treat lock files as text (not binary)
+package-lock.json text
+yarn.lock text
+pnpm-lock.yaml text
+
+# Normalize Git attributes file itself
+.gitattributes text

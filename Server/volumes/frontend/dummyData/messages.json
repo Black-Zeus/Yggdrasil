@@ -1,0 +1,72 @@
+[
+    {
+      "id": "msg-001",
+      "sender": "Sistema",
+      "senderAvatar": null,
+      "content": "Bienvenido a Aqumex. Tu cuenta ha sido activada correctamente.",
+      "timestamp": "2025-05-17T08:30:00.000Z",
+      "read": false,
+      "type": "system",
+      "priority": "normal"
+    },
+    {
+      "id": "msg-002",
+      "sender": "Ana Martínez",
+      "senderAvatar": "/avatars/ana.jpg",
+      "content": "Hola, ¿podemos revisar los resultados del proyecto esta tarde?",
+      "timestamp": "2025-05-17T10:45:22.000Z",
+      "read": false,
+      "type": "user",
+      "priority": "high"
+    },
+    {
+      "id": "msg-003",
+      "sender": "Carlos Díaz",
+      "senderAvatar": "/avatars/carlos.jpg",
+      "content": "Los reportes de mayo están listos para revisión. Te he compartido el enlace por correo.",
+      "timestamp": "2025-05-16T16:20:10.000Z",
+      "read": false,
+      "type": "user",
+      "priority": "normal"
+    },
+    {
+      "id": "msg-004",
+      "sender": "Soporte Técnico",
+      "senderAvatar": null,
+      "content": "Su solicitud #45982 ha sido resuelta. Por favor confirme si todo funciona correctamente.",
+      "timestamp": "2025-05-16T09:12:45.000Z",
+      "read": true,
+      "type": "system",
+      "priority": "normal"
+    },
+    {
+      "id": "msg-005",
+      "sender": "Laura Sánchez",
+      "senderAvatar": "/avatars/laura.jpg",
+      "content": "Necesito tu aprobación para el presupuesto del nuevo proyecto. Es urgente.",
+      "timestamp": "2025-05-15T14:50:30.000Z",
+      "read": false,
+      "type": "user",
+      "priority": "high"
+    },
+    {
+      "id": "msg-006",
+      "sender": "Roberto Gómez",
+      "senderAvatar": "/avatars/roberto.jpg",
+      "content": "¿Tienes tiempo para una llamada rápida? Necesito discutir los cambios en el diseño.",
+      "timestamp": "2025-05-15T11:25:18.000Z",
+      "read": true,
+      "type": "user",
+      "priority": "normal"
+    },
+    {
+      "id": "msg-007",
+      "sender": "Sistema",
+      "senderAvatar": null,
+      "content": "Se ha programado mantenimiento del sistema para este domingo a las 02:00 AM.",
+      "timestamp": "2025-05-14T17:00:05.000Z",
+      "read": true,
+      "type": "system",
+      "priority": "normal"
+    }
+  ]

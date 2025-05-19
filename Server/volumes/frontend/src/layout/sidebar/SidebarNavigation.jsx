@@ -1,41 +1,34 @@
-import React, { useEffect, useState } from 'react';
+// src/layout/sidebar/SidebarNavigation.jsx
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import { useLayoutStore } from '../../store/layoutStore';
+import { useMenuStore } from '../../store/menuStore'; // ✅ importar el store
 
 /**
  * SidebarNavigation - Componente para la navegación del sidebar
+ * @param {Object} props
+ * @param {boolean} props.textVisible - Si el texto debe estar visible
  */
-const SidebarNavigation = () => {
+const SidebarNavigation = ({ textVisible = true }) => {
   const { collapsed } = useLayoutStore();
-  const [menuItems, setMenuItems] = useState([]);
-  const [shortcuts, setShortcuts] = useState([]);
-  
-  // Cargar datos de menú desde los archivos JSON
+  const location = useLocation();
+  const { mainMenu, shortcuts, loadMenu } = useMenuStore(); // ✅ consumir el store
+
   useEffect(() => {
-    const loadMenuData = async () => {
-      try {
-        const menuResponse = await import('../../../dummyData/menuItems.json');
-        const shortcutsResponse = await import('../../../dummyData/shortcuts.json');
-        
-        setMenuItems(menuResponse.default);
-        setShortcuts(shortcutsResponse.default);
-      } catch (error) {
-        console.error('Error loading menu data:', error);
-      }
-    };
-    
-    loadMenuData();
-  }, []);
-  
+    loadMenu(location.pathname); // ✅ actualizar menús según la ruta
+  }, [location.pathname]);
+
   return (
     <div className="flex-1 py-4 overflow-y-auto">
       {/* Main Menu Section */}
       <div className="mb-4 px-4">
         <ul className="menu">
-          {menuItems.map(item => (
+          {mainMenu.map(item => (
             <MenuItem 
               key={item.id}
               item={item}
+              textVisible={textVisible}
             />
           ))}
         </ul>
@@ -44,7 +37,7 @@ const SidebarNavigation = () => {
       {/* Shortcuts Section */}
       <div className="px-4">
         <div className={`uppercase text-xs font-bold text-white/60 mb-2 px-3 whitespace-nowrap transition-all duration-300 ${
-          collapsed ? 'opacity-0 h-0 m-0 p-0 overflow-hidden' : 'opacity-100'
+          !textVisible ? 'opacity-0 h-0 m-0 p-0 overflow-hidden' : 'opacity-100'
         }`}>
           Shortcuts
         </div>
@@ -53,6 +46,7 @@ const SidebarNavigation = () => {
             <MenuItem 
               key={item.id}
               item={item}
+              textVisible={textVisible}
             />
           ))}
         </ul>

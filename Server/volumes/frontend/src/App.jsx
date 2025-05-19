@@ -1,49 +1,54 @@
 import React, { useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './layout/MainLayout';
-import { useLayoutStore } from './store/layoutStore';
+import DefaultContent from './layout/DefaultContent';
+import { initializeAllStores } from './store';
 
 /**
- * App - Componente principal de la aplicación
+ * App - Componente principal de la aplicación con React Router
  */
 function App() {
-  const { initializeTheme, loadCurrentUser, loadNotifications } = useLayoutStore();
-
-  // Inicializar datos al montar la aplicación
+  // Inicializar todos los stores al montar la aplicación
   useEffect(() => {
-    // Inicializar tema
-    initializeTheme();
-    
-    // Cargar datos del usuario y notificaciones
-    loadCurrentUser();
-    loadNotifications();
-  }, [initializeTheme, loadCurrentUser, loadNotifications]);
+    initializeAllStores();
+  }, []);
 
   return (
-    <MainLayout>
-      <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-sidebar dark:text-sidebar-dark">Welcome to Aqumex</h2>
-        
-        <p className="text-text dark:text-text-dark">
-          This is a responsive sidebar navigation with a modern header.
-        </p>
-        
-        <p className="text-text dark:text-text-dark">Key features include:</p>
-        
-        <ul className="list-disc pl-5 space-y-2 text-text dark:text-text-dark">
-          <li>Expandable/collapsible sidebar with smooth transitions</li>
-          <li>Animated tooltips that appear when the sidebar is collapsed</li>
-          <li>Comprehensive header with search, notifications, and user dropdown</li>
-          <li>Breadcrumb navigation path for easy site orientation</li>
-          <li>Dark mode toggle with sun/moon icons</li>
-          <li>Mobile-friendly design that adapts to different screen sizes</li>
-          <li>User profile section with avatar and role information</li>
-        </ul>
-        
-        <p className="text-text dark:text-text-dark">
-          The design uses Tailwind CSS for styling and Zustand for state management.
-        </p>
-      </div>
-    </MainLayout>
+    <Routes>
+      {/* Ruta principal con MainLayout */}
+      <Route path="/" element={
+        <MainLayout>
+          <DefaultContent />
+        </MainLayout>
+      } />
+
+      {/* Ejemplo de otra ruta con contenido diferente */}
+      <Route path="/dashboard" element={
+        <MainLayout>
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-sidebar dark:text-sidebar-dark">Dashboard</h2>
+            <p className="text-text dark:text-text-dark">
+              This is the dashboard page using React Router.
+            </p>
+          </div>
+        </MainLayout>
+      } />
+
+      {/* Ejemplo de ruta con parámetros */}
+      <Route path="/profile/:userId" element={
+        <MainLayout>
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-sidebar dark:text-sidebar-dark">User Profile</h2>
+            <p className="text-text dark:text-text-dark">
+              This page would show details for a specific user ID from the URL.
+            </p>
+          </div>
+        </MainLayout>
+      } />
+
+      {/* Redirección para rutas no encontradas */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 
