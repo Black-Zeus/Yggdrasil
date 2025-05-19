@@ -1,0 +1,142 @@
+{
+    "categories": [
+        {
+            "id": "evaluaciones",
+            "name": "Evaluaciones y Control de Desempeño",
+            "subcategories": [
+                {
+                    "id": "competencias",
+                    "name": "Evaluación de competencias laborales"
+                },
+                {
+                    "id": "desempeno_anual",
+                    "name": "Evaluación de desempeño anual"
+                },
+                {
+                    "id": "post_capacitacion",
+                    "name": "Evaluación post-capacitación"
+                },
+                {
+                    "id": "evaluacion_360",
+                    "name": "Evaluación 360°"
+                },
+                {
+                    "id": "autoevaluacion",
+                    "name": "Autoevaluación del trabajador"
+                },
+                {
+                    "id": "clima_laboral",
+                    "name": "Evaluación de clima laboral"
+                }
+            ]
+        },
+        {
+            "id": "operaciones",
+            "name": "Operaciones y Servicio en Terreno",
+            "subcategories": [
+                {
+                    "id": "orden_terreno",
+                    "name": "Orden de trabajo en terreno"
+                },
+                {
+                    "id": "checklist_inspeccion",
+                    "name": "Checklist de inspección técnica"
+                },
+                {
+                    "id": "mantencion_preventiva",
+                    "name": "Formulario de mantención preventiva"
+                },
+                {
+                    "id": "control_calidad",
+                    "name": "Control de calidad en terreno"
+                },
+                {
+                    "id": "bitacora_actividades",
+                    "name": "Bitácora de actividades diarias"
+                },
+                {
+                    "id": "reporte_avances",
+                    "name": "Reporte de avances de obra"
+                }
+            ]
+        },
+        {
+            "id": "soporte",
+            "name": "Soporte y Servicio Técnico",
+            "subcategories": [
+                {
+                    "id": "orden_servicio",
+                    "name": "Orden de servicio (reparación o instalación)"
+                },
+                {
+                    "id": "registro_incidentes",
+                    "name": "Registro de incidentes y fallas"
+                },
+                {
+                    "id": "atencion_cliente",
+                    "name": "Formulario de atención a cliente"
+                },
+                {
+                    "id": "checklist_instalacion",
+                    "name": "Checklist de instalación de equipos"
+                },
+                {
+                    "id": "diagnostico_tecnico",
+                    "name": "Diagnóstico técnico"
+                },
+                {
+                    "id": "entrega_tecnica",
+                    "name": "Entrega técnica de servicio"
+                }
+            ]
+        },
+        {
+            "id": "seguridad",
+            "name": "Seguridad y Prevención",
+            "subcategories": [
+                {
+                    "id": "lista_seguridad",
+                    "name": "Lista de chequeo de seguridad (EPP, condiciones de trabajo)"
+                },
+                {
+                    "id": "inspeccion_riesgos",
+                    "name": "Inspección de riesgos laborales"
+                },
+                {
+                    "id": "registro_accidentes",
+                    "name": "Registro de accidentes o incidentes"
+                },
+                {
+                    "id": "observacion_preventiva",
+                    "name": "Formulario de observación preventiva"
+                },
+                {
+                    "id": "reporte_simulacro",
+                    "name": "Reporte de evacuación / simulacro"
+                }
+            ]
+        },
+        {
+            "id": "personalizados",
+            "name": "Personalizados y Libres",
+            "subcategories": [
+                {
+                    "id": "formulario_libre",
+                    "name": "Formulario libre (para cualquier propósito interno)"
+                },
+                {
+                    "id": "sugerencias",
+                    "name": "Formulario de sugerencias"
+                },
+                {
+                    "id": "registro_ideas",
+                    "name": "Formulario de registro de ideas o innovaciones"
+                },
+                {
+                    "id": "cuestionarios",
+                    "name": "Cuestionarios personalizados"
+                }
+            ]
+        }
+    ]
+}

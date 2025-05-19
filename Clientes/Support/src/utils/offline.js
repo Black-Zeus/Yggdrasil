@@ -1,0 +1,1 @@
+// Utilidades para modo offline 

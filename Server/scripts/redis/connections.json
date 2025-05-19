@@ -1,0 +1,24 @@
+[
+  {
+    "compressor": "NONE",
+    "id": "e5877076-386c-43dc-a712-1248c0ffe7af",
+    "host": "yggdrasil-redis",
+    "port": 6379,
+    "name": "yggdrasil-redis:6379",
+    "db": 0,
+    "username": "default",
+    "password": "mipasswordsegura",
+    "connectionType": "STANDALONE",
+    "nameFromProvider": null,
+    "provider": "REDIS_COMMUNITY_EDITION",
+    "lastConnection": "2025-04-10T22:12:58.601Z",
+    "modules": [],
+    "tls": false,
+    "tlsServername": null,
+    "verifyServerCert": null,
+    "caCert": null,
+    "clientCert": null,
+    "ssh": false,
+    "sshOptions": null
+  }
+]

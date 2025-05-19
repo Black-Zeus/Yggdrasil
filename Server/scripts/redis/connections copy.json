@@ -1,0 +1,13 @@
+{
+    "connections": [
+      {
+        "name": "Redis Cache",
+        "host": "inventory-redis",
+        "port": 6379,
+        "username": "default",
+        "password": "mipasswordsegura",
+        "tls": false
+      }
+    ]
+  }
+  

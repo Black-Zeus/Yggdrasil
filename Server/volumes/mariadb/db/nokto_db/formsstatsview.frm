@@ -1,0 +1,16 @@
+TYPE=VIEW
+query=select `f`.`id` AS `id`,`f`.`title` AS `title`,`f`.`visibility` AS `visibility`,`c`.`name` AS `category`,`sc`.`name` AS `subcategory`,`st`.`name` AS `status`,`u`.`full_name` AS `created_by`,count(distinct `fq`.`id`) AS `total_questions`,count(distinct `fp`.`id`) AS `total_participants`,count(distinct `fr`.`id`) AS `total_responses`,min(`fr`.`submitted_at`) AS `first_response`,max(`fr`.`submitted_at`) AS `last_response`,avg(timestampdiff(MINUTE,`fr`.`created_at`,`fr`.`submitted_at`)) AS `avg_completion_time_minutes` from (((((((`nokto_db`.`forms` `f` join `nokto_db`.`categories` `c` on(`f`.`category_id` = `c`.`id`)) left join `nokto_db`.`subcategories` `sc` on(`f`.`subcategory_id` = `sc`.`id`)) join `nokto_db`.`status_types` `st` on(`f`.`status_id` = `st`.`id`)) join `nokto_db`.`users` `u` on(`f`.`created_by` = `u`.`id`)) left join `nokto_db`.`form_questions` `fq` on(`f`.`id` = `fq`.`form_id`)) left join `nokto_db`.`form_permissions` `fp` on(`f`.`id` = `fp`.`form_id`)) left join `nokto_db`.`form_responses` `fr` on(`f`.`id` = `fr`.`form_id`)) group by `f`.`id`
+md5=05c775c856bdb0cafae607dcbe1d4f26
+updatable=0
+algorithm=0
+definer_user=root
+definer_host=localhost
+suid=2
+with_check_option=0
+timestamp=0001747614996185884
+create-version=2
+source=SELECT f.id,\n    f.title,\n    f.visibility,\n    c.name as category,\n    sc.name as subcategory,\n    st.name as status,\n    u.full_name as created_by,\n    COUNT(DISTINCT fq.id) as total_questions,\n    COUNT(DISTINCT fp.id) as total_participants,\n    COUNT(DISTINCT fr.id) as total_responses,\n    MIN(fr.submitted_at) as first_response,\n    MAX(fr.submitted_at) as last_response,\n    AVG(\n        TIMESTAMPDIFF(MINUTE, fr.created_at, fr.submitted_at)\n    ) as avg_completion_time_minutes\nFROM forms f\n    JOIN categories c ON f.category_id = c.id\n    LEFT JOIN subcategories sc ON f.subcategory_id = sc.id\n    JOIN status_types st ON f.status_id = st.id\n    JOIN users u ON f.created_by = u.id\n    LEFT JOIN form_questions fq ON f.id = fq.form_id\n    LEFT JOIN form_permissions fp ON f.id = fp.form_id\n    LEFT JOIN form_responses fr ON f.id = fr.form_id\nGROUP BY f.id
+client_cs_name=utf8mb3
+connection_cl_name=utf8mb3_general_ci
+view_body_utf8=select `f`.`id` AS `id`,`f`.`title` AS `title`,`f`.`visibility` AS `visibility`,`c`.`name` AS `category`,`sc`.`name` AS `subcategory`,`st`.`name` AS `status`,`u`.`full_name` AS `created_by`,count(distinct `fq`.`id`) AS `total_questions`,count(distinct `fp`.`id`) AS `total_participants`,count(distinct `fr`.`id`) AS `total_responses`,min(`fr`.`submitted_at`) AS `first_response`,max(`fr`.`submitted_at`) AS `last_response`,avg(timestampdiff(MINUTE,`fr`.`created_at`,`fr`.`submitted_at`)) AS `avg_completion_time_minutes` from (((((((`nokto_db`.`forms` `f` join `nokto_db`.`categories` `c` on(`f`.`category_id` = `c`.`id`)) left join `nokto_db`.`subcategories` `sc` on(`f`.`subcategory_id` = `sc`.`id`)) join `nokto_db`.`status_types` `st` on(`f`.`status_id` = `st`.`id`)) join `nokto_db`.`users` `u` on(`f`.`created_by` = `u`.`id`)) left join `nokto_db`.`form_questions` `fq` on(`f`.`id` = `fq`.`form_id`)) left join `nokto_db`.`form_permissions` `fp` on(`f`.`id` = `fp`.`form_id`)) left join `nokto_db`.`form_responses` `fr` on(`f`.`id` = `fr`.`form_id`)) group by `f`.`id`
+mariadb-version=100621

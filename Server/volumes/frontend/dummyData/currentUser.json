@@ -1,0 +1,9 @@
+{
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@aqumex.com",
+    "role": "Administrator",
+    "avatar": "/api/placeholder/40/40",
+    "department": "IT",
+    "lastLogin": "2025-05-17T10:30:45Z"
+  }

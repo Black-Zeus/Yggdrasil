@@ -1,0 +1,13 @@
+# Usa la imagen de MariaDB con versión específica
+FROM mariadb:10.6
+
+# =======================
+# Copia de scripts de inicialización
+# =======================
+COPY ./scripts/mariadb/entrypoint/*.sql /docker-entrypoint-initdb.d/
+
+# =======================
+# Exponer el puerto 3306
+# =======================
+EXPOSE ${MYSQL_PORT}
+

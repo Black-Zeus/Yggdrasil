@@ -1,0 +1,62 @@
+[
+    {
+      "id": 1,
+      "type": "message",
+      "sender": "Carlos Rodríguez",
+      "content": "Nuevo mensaje sobre el proyecto XYZ",
+      "timestamp": "2025-05-18T09:15:00Z",
+      "read": false
+    },
+    {
+      "id": 2,
+      "type": "message",
+      "sender": "María González",
+      "content": "Actualización del informe trimestral",
+      "timestamp": "2025-05-17T14:30:00Z",
+      "read": false
+    },
+    {
+      "id": 3,
+      "type": "message",
+      "sender": "Sistema",
+      "content": "Mantenimiento programado para esta noche",
+      "timestamp": "2025-05-16T17:45:00Z",
+      "read": false
+    },
+    {
+      "id": 4,
+      "type": "alert",
+      "title": "Recordatorio de reunión",
+      "content": "Reunión de equipo en 30 minutos",
+      "timestamp": "2025-05-18T10:30:00Z",
+      "priority": "high",
+      "read": false
+    },
+    {
+      "id": 5,
+      "type": "alert",
+      "title": "Actualización del sistema",
+      "content": "Nueva versión disponible (v2.5.0)",
+      "timestamp": "2025-05-17T08:00:00Z",
+      "priority": "medium",
+      "read": false
+    },
+    {
+      "id": 6,
+      "type": "alert",
+      "title": "Completar perfil",
+      "content": "Por favor, actualice su información de perfil",
+      "timestamp": "2025-05-15T11:20:00Z",
+      "priority": "low",
+      "read": true
+    },
+    {
+      "id": 7,
+      "type": "alert",
+      "title": "Límite de almacenamiento",
+      "content": "Se está acercando al límite de almacenamiento",
+      "timestamp": "2025-05-14T16:45:00Z",
+      "priority": "medium",
+      "read": true
+    }
+  ]

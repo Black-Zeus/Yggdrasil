@@ -1,0 +1,43 @@
+# Etapa 1: Construcción del proyecto React
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copia los archivos necesarios para instalar dependencias
+COPY volumes/frontend/package.json volumes/frontend/package-lock.json ./
+
+# Agregar variables de entorno del entorno Docker al proceso de build
+ARG VITE_FRONTEND_ENV
+ENV VITE_FRONTEND_ENV=${VITE_FRONTEND_ENV}
+
+RUN echo "Building with VITE_FRONTEND_ENV: $VITE_FRONTEND_ENV"
+
+# Copia el script de configuración
+COPY scripts/nginx/setup_env.sh /setup_env.sh
+RUN chmod +x /setup_env.sh
+
+# Ejecuta el script para configurar el entorno
+RUN /setup_env.sh
+
+RUN npm install
+
+# Copia el resto del código fuente
+COPY volumes/frontend/ ./
+
+# Genera el build de React
+RUN npm run build
+
+# Etapa 2: Configuración del servidor NGINX
+FROM nginx:1.25-alpine
+
+COPY scripts/nginx/entrypoint.sh /entrypoint.sh
+COPY scripts/nginx/nginx.conf /etc/nginx/templates/nginx.template.conf
+
+# Copia el build generado
+COPY --from=builder /app/dist /app
+
+RUN chmod +x /entrypoint.sh
+
+EXPOSE ${NGINX_PORT}
+
+ENTRYPOINT ["/entrypoint.sh"]

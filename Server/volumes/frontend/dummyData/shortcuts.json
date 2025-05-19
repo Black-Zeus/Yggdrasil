@@ -1,0 +1,59 @@
+[
+    {
+      "id": "tasks",
+      "text": "Tasks",
+      "icon": "✓",
+      "path": "/tasks",
+      "submenu": [
+        {
+          "id": "my-tasks",
+          "text": "My Tasks",
+          "path": "/tasks/my-tasks"
+        },
+        {
+          "id": "assigned",
+          "text": "Assigned",
+          "path": "/tasks/assigned"
+        },
+        {
+          "id": "completed",
+          "text": "Completed",
+          "path": "/tasks/completed"
+        }
+      ]
+    },
+    {
+      "id": "help",
+      "text": "Help",
+      "icon": "❓",
+      "path": "/help"
+    },
+    {
+      "id": "settings",
+      "text": "Settings",
+      "icon": "⚙️",
+      "path": "/settings",
+      "submenu": [
+        {
+          "id": "account",
+          "text": "Account",
+          "path": "/settings/account"
+        },
+        {
+          "id": "preferences",
+          "text": "Preferences",
+          "path": "/settings/preferences"
+        },
+        {
+          "id": "security",
+          "text": "Security",
+          "path": "/settings/security"
+        },
+        {
+          "id": "notifications",
+          "text": "Notifications",
+          "path": "/settings/notifications"
+        }
+      ]
+    }
+  ]

@@ -1,0 +1,284 @@
+{
+    "configuration": {
+        "formConfig": {
+            "metadata": {
+                "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                "title": "Evaluación de Desempeño - Empleado",
+                "description": "Formulario para evaluar el desempeño anual de un colaborador en distintas dimensiones.",
+                "version": "1.0.0",
+                "status": "published",
+                "createdAt": "2025-04-03T10:00:00Z",
+                "updatedAt": "2025-04-03T17:00:00Z"
+            },
+            "category": {
+                "categoryId": "evaluaciones",
+                "categoryName": "Evaluaciones y Control de Desempeño",
+                "subcategoryId": "desempeno_anual",
+                "subcategoryName": "Evaluación de desempeño anual",
+                "display": "Evaluaciones y Control de Desempeño - Evaluación de desempeño anual"
+            },
+            "visibility": {
+                "type": "Pública",
+                "allowAnonymous": false,
+                "requireInstitutionalEmail": true,
+                "limitOneResponsePerPerson": true
+            },
+            "timing": {
+                "deadline": "30/04/2025",
+                "time": "18:00"
+            },
+            "requirements": {
+                "requireSignature": true
+            }
+        },
+        "questions": [
+            {
+                "id": "q1",
+                "order": 0,
+                "title": "Nombre completo del evaluado",
+                "description": "Ingrese el nombre completo del colaborador evaluado.",
+                "question": {
+                    "type": "text",
+                    "prompt": "Ejemplo: Juan Pérez",
+                    "required": true
+                }
+            },
+            {
+                "id": "q2",
+                "order": 1,
+                "title": "Correo electrónico institucional",
+                "description": "Este campo se utiliza para notificaciones internas.",
+                "question": {
+                    "type": "text",
+                    "prompt": "Ejemplo: juan.perez@empresa.cl",
+                    "required": true,
+                    "validation": {
+                        "regex": "email",
+                        "errorMessage": "Correo inválido"
+                    }
+                }
+            },
+            {
+                "id": "q3",
+                "order": 2,
+                "title": "Área de desempeño",
+                "description": "Seleccione el área en que se desempeña el evaluado.",
+                "question": {
+                    "type": "dropdown",
+                    "prompt": "Seleccione una opción",
+                    "required": true,
+                    "options": [
+                        {
+                            "value": "it",
+                            "label": "Tecnologías de la Información"
+                        },
+                        {
+                            "value": "rh",
+                            "label": "Recursos Humanos"
+                        },
+                        {
+                            "value": "ventas",
+                            "label": "Ventas"
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "q4",
+                "order": 3,
+                "title": "Nivel de cumplimiento de metas",
+                "description": "Seleccione el nivel alcanzado por el evaluado.",
+                "question": {
+                    "type": "single_choice",
+                    "prompt": "Nivel de cumplimiento",
+                    "required": true,
+                    "options": [
+                        {
+                            "value": "alto",
+                            "label": "Alto"
+                        },
+                        {
+                            "value": "medio",
+                            "label": "Medio"
+                        },
+                        {
+                            "value": "bajo",
+                            "label": "Bajo"
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "q5",
+                "order": 4,
+                "title": "Fortalezas del evaluado",
+                "description": "Seleccione todas las fortalezas que aplica.",
+                "question": {
+                    "type": "multiple_choice",
+                    "prompt": "Puede seleccionar más de una opción.",
+                    "required": false,
+                    "options": [
+                        {
+                            "value": "comunicacion",
+                            "label": "Comunicación efectiva"
+                        },
+                        {
+                            "value": "liderazgo",
+                            "label": "Liderazgo"
+                        },
+                        {
+                            "value": "resolucion",
+                            "label": "Resolución de problemas"
+                        },
+                        {
+                            "value": "colaboracion",
+                            "label": "Trabajo colaborativo"
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "q6",
+                "order": 5,
+                "title": "Fecha de la evaluación",
+                "description": "Indique el día en que se realiza esta evaluación.",
+                "question": {
+                    "type": "date",
+                    "prompt": "Seleccionar fecha",
+                    "required": true
+                }
+            },
+            {
+                "id": "q7",
+                "order": 6,
+                "title": "Hora de inicio",
+                "description": "Hora en que se comenzó la evaluación.",
+                "question": {
+                    "type": "time",
+                    "prompt": "Seleccionar hora",
+                    "required": true
+                }
+            },
+            {
+                "id": "q8",
+                "order": 7,
+                "title": "Autoevaluación del desempeño",
+                "description": "Indique el puntaje que considera apropiado para su desempeño.",
+                "question": {
+                    "type": "range",
+                    "prompt": "Escala de 1 a 10",
+                    "required": true,
+                    "min": 1,
+                    "max": 10,
+                    "step": 1
+                }
+            },
+            {
+                "id": "q9",
+                "order": 8,
+                "title": "Subir plan de mejora",
+                "description": "Adjunte el documento PDF con el plan de mejora si corresponde.",
+                "question": {
+                    "type": "file_upload",
+                    "prompt": "Cargar archivo",
+                    "required": false
+                }
+            },
+            {
+                "id": "q10",
+                "order": 9,
+                "title": "¿Recomienda al evaluado para un ascenso?",
+                "description": "Seleccione sí o no según su criterio.",
+                "question": {
+                    "type": "yes_no",
+                    "prompt": "¿Recomienda para ascenso?",
+                    "required": true
+                }
+            },
+            {
+                "id": "q11",
+                "order": 10,
+                "title": "Comentarios generales",
+                "description": "Ingrese cualquier observación adicional relevante.",
+                "question": {
+                    "type": "textarea",
+                    "prompt": "Comentario adicional",
+                    "required": false
+                }
+            },
+            {
+                "id": "q12",
+                "order": 11,
+                "title": "Evaluación por competencias",
+                "description": "Evalúe los siguientes aspectos del evaluado.",
+                "question": {
+                    "type": "matrix",
+                    "prompt": "Seleccione una opción por fila.",
+                    "required": true,
+                    "items": [
+                        {
+                            "id": "puntualidad",
+                            "label": "Puntualidad"
+                        },
+                        {
+                            "id": "autonomia",
+                            "label": "Autonomía"
+                        },
+                        {
+                            "id": "colaboracion",
+                            "label": "Colaboración"
+                        },
+                        {
+                            "id": "proactividad",
+                            "label": "Proactividad"
+                        }
+                    ],
+                    "options": [
+                        {
+                            "value": "excelente",
+                            "label": "Excelente"
+                        },
+                        {
+                            "value": "bueno",
+                            "label": "Bueno"
+                        },
+                        {
+                            "value": "regular",
+                            "label": "Regular"
+                        },
+                        {
+                            "value": "deficiente",
+                            "label": "Deficiente"
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "q13",
+                "order": 12,
+                "title": "Ranking de competencias críticas",
+                "description": "Ordene de mayor a menor importancia las siguientes competencias.",
+                "question": {
+                    "type": "ranking",
+                    "prompt": "Arrastre para ordenar",
+                    "required": true,
+                    "items": [
+                        "Gestión del tiempo",
+                        "Toma de decisiones",
+                        "Comunicación",
+                        "Flexibilidad"
+                    ]
+                }
+            }
+        ]
+    },
+    "signature": {
+        "hash": "3b5c1e71c73f8f5e4c3f194e9930f839a3727a3c9bb88c2f0fc7b2c0e2c4f4f6",
+        "algorithm": "sha256",
+        "generatedAt": "2025-04-05T10:15:30Z",
+        "signedBy": "sistema-evaluador",
+        "validUntil": "2026-04-05T10:15:30Z",
+        "certificateId": "cert-45678-abcde-12345",
+        "verificationUrl": "https://verificacion.example.com/form/f47ac10b-58cc-4372-a567-0e02b2c3d479"
+    }
+}

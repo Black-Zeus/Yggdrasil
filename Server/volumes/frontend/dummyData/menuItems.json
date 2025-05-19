@@ -1,0 +1,95 @@
+[
+    {
+      "id": "dashboard",
+      "text": "Dashboard",
+      "icon": "📊",
+      "active": true,
+      "path": "/dashboard"
+    },
+    {
+      "id": "projects",
+      "text": "Projects",
+      "icon": "📁",
+      "path": "/projects",
+      "submenu": [
+        {
+          "id": "all-projects",
+          "text": "All Projects",
+          "path": "/projects/all"
+        },
+        {
+          "id": "recent",
+          "text": "Recent",
+          "path": "/projects/recent"
+        },
+        {
+          "id": "in-progress",
+          "text": "In Progress",
+          "path": "/projects/in-progress",
+          "active": true
+        },
+        {
+          "id": "completed",
+          "text": "Completed",
+          "path": "/projects/completed"
+        }
+      ]
+    },
+    {
+      "id": "messages",
+      "text": "Messages",
+      "icon": "📨",
+      "path": "/messages",
+      "open": true,
+      "submenu": [
+        {
+          "id": "inbox",
+          "text": "Inbox",
+          "path": "/messages/inbox"
+        },
+        {
+          "id": "sent",
+          "text": "Sent",
+          "path": "/messages/sent"
+        },
+        {
+          "id": "drafts",
+          "text": "Drafts",
+          "path": "/messages/drafts"
+        },
+        {
+          "id": "archived",
+          "text": "Archived",
+          "path": "/messages/archived"
+        }
+      ]
+    },
+    {
+      "id": "analytics",
+      "text": "Analytics",
+      "icon": "📈",
+      "path": "/analytics",
+      "submenu": [
+        {
+          "id": "overview",
+          "text": "Overview",
+          "path": "/analytics/overview"
+        },
+        {
+          "id": "reports",
+          "text": "Reports",
+          "path": "/analytics/reports"
+        },
+        {
+          "id": "performance",
+          "text": "Performance",
+          "path": "/analytics/performance"
+        },
+        {
+          "id": "metrics",
+          "text": "Metrics",
+          "path": "/analytics/metrics"
+        }
+      ]
+    }
+  ]

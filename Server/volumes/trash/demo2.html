@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Desempeño del Sistema de Formularios</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="permissions-layout">
+      <!-- Panel izquierdo: Filtros -->
+      <div class="left-panel">
+        <div class="role-section">
+          <h2 class="role-title">Filtrar por Categoría</h2>
+          <select class="role-select">
+            <option value="all">Todas</option>
+            <option value="evaluaciones">Evaluaciones</option>
+            <option value="terreno">Servicios en terreno</option>
+            <option value="soporte">Soporte</option>
+            <option value="safety">Safety</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+
+        <div class="role-section">
+          <h2 class="role-title">Rango de Fechas</h2>
+          <input type="date" class="role-select" />
+          <input type="date" class="role-select" />
+        </div>
+
+        <div class="role-actions">
+          <button class="btn btn-outline">Aplicar Filtros</button>
+        </div>
+      </div>
+
+      <!-- Panel derecho: Métricas -->
+      <div class="permissions-panel">
+        <div class="permissions-header">
+          <h2 class="role-title">Métricas de Desempeño</h2>
+        </div>
+
+        <!-- Dashboard principal -->
+        <div class="tree-item">
+          <div class="tree-parent">
+            <span>Formularios Generales</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-toggle"><span class="toggle-label">Formularios completados: <strong>120</strong></span></div>
+            <div class="tree-toggle"><span class="toggle-label">Formularios abandonados: <strong>30</strong></span></div>
+            <div class="tree-toggle"><span class="toggle-label">Tasa de completitud: <strong>80%</strong></span></div>
+            <div class="tree-toggle"><span class="toggle-label">Tiempo promedio de llenado: <strong>5 min</strong></span></div>
+          </div>
+        </div>
+
+        <!-- Por categoría -->
+        <div class="tree-item">
+          <div class="tree-parent">
+            <span>Evaluaciones</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-toggle"><span class="toggle-label">Tasa de aprobación: <strong>85%</strong></span></div>
+            <div class="tree-toggle"><span class="toggle-label">Promedio de calificación: <strong>4.3 / 5</strong></span></div>
+          </div>
+        </div>
+
+        <div class="tree-item">
+          <div class="tree-parent">
+            <span>Servicios en terreno</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-toggle"><span class="toggle-label">Tiempo promedio de respuesta: <strong>2.5 hrs</strong></span></div>
+            <div class="tree-toggle"><span class="toggle-label">Resoluciones completadas: <strong>95%</strong></span></div>
+          </div>
+        </div>
+
+        <div class="tree-item">
+          <div class="tree-parent">
+            <span>Soporte</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-toggle"><span class="toggle-label">Tickets cerrados: <strong>210</strong></span></div>
+            <div class="tree-toggle"><span class="toggle-label">Tiempo de resolución promedio: <strong>1.2 días</strong></span></div>
+          </div>
+        </div>
+
+        <div class="tree-item">
+          <div class="tree-parent">
+            <span>Safety</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-toggle"><span class="toggle-label">Incidentes reportados: <strong>12</strong></span></div>
+            <div class="tree-toggle"><span class="toggle-label">Seguimiento completado: <strong>100%</strong></span></div>
+          </div>
+        </div>
+
+        <div class="tree-item">
+          <div class="tree-parent">
+            <span>Rendimiento por Usuario</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-toggle"><span class="toggle-label">Formularios completados por usuario: <strong>Media: 14</strong></span></div>
+            <div class="tree-toggle"><span class="toggle-label">Precisión de datos: <strong>98%</strong></span></div>
+          </div>
+        </div>
+
+        <div class="tree-item">
+          <div class="tree-parent">
+            <span>Calidad del Formulario</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-toggle"><span class="toggle-label">Campos obligatorios más omitidos: <strong>Correo electrónico</strong></span></div>
+            <div class="tree-toggle"><span class="toggle-label">Errores comunes detectados: <strong>10% campos mal formateados</strong></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

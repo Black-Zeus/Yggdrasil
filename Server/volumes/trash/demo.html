@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Roles y Permisos</title>
+    <style>
+        :root {
+            --primary: #1D3B7A;
+            --primary-light: #4169E1;
+            --primary-dark: #13264D;
+            --text: #1D3B7A;
+            --text-muted: #6B7280;
+            --background: #F7F9FC;
+            --background-card: #FFFFFF;
+            --highlight: #F3F6FD;
+            --border: #D1D5DB;
+            --border-light: #E5E7EB;
+            --success: #28A745;
+            --warning: #FFA500;
+            --info: #0070F3;
+            --danger: #DC3545;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background);
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .permissions-layout {
+            display: grid;
+            grid-template-columns: 25% 75%;
+            gap: 24px;
+            background-color: var(--background-card);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            min-height: 700px;
+        }
+
+        /* Panel izquierdo */
+        .left-panel {
+            padding: 20px;
+            border-right: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Sección de roles */
+        .role-section {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .role-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .role-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            background-color: var(--highlight);
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .role-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--highlight);
+        }
+
+        /* Sección de usuarios */
+        .users-section {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 32px 10px 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .users-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .user-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 8px;
+        }
+
+        .user-item:hover {
+            background-color: var(--highlight);
+        }
+
+        .user-item.active {
+            background-color: var(--highlight);
+            border: 1px solid var(--primary-light);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 500;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .user-role {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Panel de permisos */
+        .permissions-panel {
+            padding: 20px;
+        }
+
+        .permissions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .select-all {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Árbol de permisos */
+        .tree-item {
+            margin-bottom: 12px;
+        }
+
+        .tree-parent {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background-color: var(--highlight);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tree-parent:hover {
+            background-color: var(--border-light);
+        }
+
+        .chevron-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            transition: transform 0.2s;
+        }
+
+        .tree-children {
+            margin-left: 24px;
+            padding: 8px 0 8px 12px;
+            border-left: 1px solid var(--border-light);
+        }
+
+        .tree-toggle {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 4px 0;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .tree-toggle:hover {
+            background-color: var(--highlight);
+        }
+
+        .toggle-label {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        /* Toggle switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-left: 8px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--success);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .permissions-layout {
+                grid-template-columns: 1fr;
+            }
+            .left-panel {
+                border-right: none;
+                border-bottom: 1px solid var(--border-light);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="permissions-layout">
+            <!-- Panel izquierdo: Roles y Usuarios -->
+            <div class="left-panel">
+                <!-- Sección de roles -->
+                <div class="role-section">
+                    <h2 class="role-title">Rol asignado</h2>
+                    <select class="role-select">
+                        <option value="admin">Administrador</option>
+                        <option value="editor" selected>Editor</option>
+                        <option value="viewer">Visualizador</option>
+                        <option value="custom">Personalizado</option>
+                    </select>
+                    <div class="role-badge">
+                        4 modificaciones del rol base
+                    </div>
+                    <div class="role-actions">
+                        <button class="btn btn-outline">Guardar como plantilla</button>
+                    </div>
+                </div>
+
+                <!-- Sección de usuarios -->
+                <div class="users-section">
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="Buscar usuario...">
+                    </div>
+                    <ul class="users-list">
+                        <li class="user-item active">
+                            <img src="/api/placeholder/32/32" alt="Avatar" class="user-avatar">
+                            <div class="user-info">
+                                <h4 class="user-name">Juan Pérez</h4>
+                                <span class="user-role">Editor</span>
+                            </div>
+                        </li>
+                        <li class="user-item">
+                            <img src="/api/placeholder/32/32" alt="Avatar" class="user-avatar">
+                            <div class="user-info">
+                                <h4 class="user-name">María García</h4>
+                                <span class="user-role">Administrador</span>
+                            </div>
+                        </li>
+                        <li class="user-item">
+                            <img src="/api/placeholder/32/32" alt="Avatar" class="user-avatar">
+                            <div class="user-info">
+                                <h4 class="user-name">Carlos López</h4>
+                                <span class="user-role">Usuario</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Panel derecho: Permisos -->
+            <div class="permissions-panel">
+                <div class="permissions-header">
+                    <h2 class="role-title">Permisos del rol</h2>
+                    <div class="select-all">
+                        <span>Seleccionar todo</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Árbol de permisos -->
+                <div class="tree-item">
+                    <div class="tree-parent">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                        <span>Dashboard</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="tree-children">
+                        <div class="tree-toggle">
+                            <span class="toggle-label">Ver dashboard</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="tree-toggle">
+                            <span class="toggle-label">Editar widgets</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tree-item">
+                    <div class="tree-parent">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                        <span>Usuarios</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="tree-children">
+                        <div class="tree-toggle">
+                            <span class="toggle-label">Ver usuarios</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="tree-toggle">
+                            <span class="toggle-label">Crear usuarios</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="tree-toggle">
+                            <span class="toggle-label">Editar usuarios</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="tree-toggle">
+                            <span class="toggle-label">Eliminar usuarios</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tree-item">
+                    <div class="tree-parent">
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                        <span>Configuración</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="tree-children">
+                        <div class="tree-toggle">
+                            <span class="toggle-label">Configuración general</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="tree-toggle">
+                            <span class="toggle-label">Gestión de roles</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="tree-toggle">
+                            <span class="toggle-label">Configuración avanzada</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
