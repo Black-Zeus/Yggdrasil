@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import SubmenuItem from './SubmenuItem';
-import { useLayoutStore } from '../../store/layoutStore';
+import { useSidebarStore } from '../../store/sidebarStore';
 import IconResolve_RI from '../../components/atoms/IconResolve_RI';
 
 /**
@@ -13,7 +13,7 @@ import IconResolve_RI from '../../components/atoms/IconResolve_RI';
  * @param {boolean} props.textVisible - Si el texto debe estar visible
  */
 const MenuItem = ({ item, textVisible = true }) => {
-  const { collapsed } = useLayoutStore();
+  const { collapsed } = useSidebarStore();
   const [isOpen, setIsOpen] = useState(item.open || false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const hasSubmenu = item.submenu && item.submenu.length > 0;

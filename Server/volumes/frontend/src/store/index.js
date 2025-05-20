@@ -1,4 +1,3 @@
-// src/store/index.js
 import { useSidebarStore } from './sidebarStore';
 import { useThemeStore } from './themeStore';
 import { useUserStore } from './userStore';
@@ -11,20 +10,21 @@ export { useThemeStore } from './themeStore';
 export { useUserStore } from './userStore';
 export { useMessageStore } from './messageStore';
 export { useNotificationStore } from './notificationStore';
+export { useMenuStore } from './menuStore';
 
 /**
  * Función de utilidad para inicializar todos los stores
+ * Ahora solo necesitamos ejecutar las inicializaciones específicas
  */
 export const initializeAllStores = () => {
-  const { initializeSidebar } = useSidebarStore.getState();
-  const { initializeTheme } = useThemeStore.getState();
+  // Sólo llamar carga inicial de datos
   const { loadCurrentUser } = useUserStore.getState();
   const { loadMessages } = useMessageStore.getState();
   const { loadNotifications } = useNotificationStore.getState();
+  const { initializeTheme } = useThemeStore.getState();
   
-  // Inicializar UI primero (tema y sidebar)
+  // Para temas que necesitan inicialización DOM
   initializeTheme();
-  initializeSidebar();
   
   // Cargar datos de usuario y contenido
   loadCurrentUser();

@@ -1,4 +1,6 @@
+# ----------------------------------------
 # Node.js
+# ----------------------------------------
 node_modules/
 npm-debug.log*
 yarn-debug.log*
@@ -8,19 +10,39 @@ package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
-# Logs
+# ----------------------------------------
+# Logs y temporales
+# ----------------------------------------
 logs/
 *.log
 log.txt
+*.pid
+*.pid.lock
+*.seed
 
-# Editor y sistema
+# Contenedores log personalizados
+Server/logs/
+
+# ----------------------------------------
+# Archivos y carpetas de sistema / IDE
+# ----------------------------------------
 .DS_Store
 Thumbs.db
+.AppleDouble
+.LSOverride
+ehthumbs.db
+Desktop.ini
+*~
 .vscode/
 .idea/
+*.iml
 *.swp
+.history/
+*.code-workspace
 
-# Build y dist
+# ----------------------------------------
+# Archivos de construcción y salida
+# ----------------------------------------
 dist/
 build/
 out/
@@ -28,15 +50,22 @@ temp/
 tmp/
 .cache/
 *.tsbuildinfo
+*.orig
+*.rej
 
-# Vite
+# ----------------------------------------
+# Frameworks específicos
+# ----------------------------------------
 .vite/
+.next/
+.nuxt/
+.nuxt-dist/
+.svelte-kit/
+storybook-static/
 
-# Coverage
-coverage/
-.nyc_output/
-
-# Env files
+# ----------------------------------------
+# Archivos de entorno
+# ----------------------------------------
 .env
 .env.*.local
 .env.local
@@ -44,79 +73,42 @@ coverage/
 .env.test.local
 .env.production.local
 
-# Test snapshots
+# ----------------------------------------
+# Cobertura de tests
+# ----------------------------------------
+coverage/
+.nyc_output/
 __snapshots__/
 *.spec.ts.snap
 *.test.ts.snap
 
-# Docker
-docker-data/
-*.pid
-*.seed
-*.pid.lock
+# ----------------------------------------
+# Firebase / Netlify
+# ----------------------------------------
+.firebase/
+.firebaserc
+.netlify/
 
-# Storybook
-storybook-static/
-
+# ----------------------------------------
 # ESLint / Prettier
+# ----------------------------------------
 .eslintcache
 .prettiercache
 
-# TypeScript
-*.tsbuildinfo
-
-# Optional: OS-specific
-# macOS
-.AppleDouble
-.LSOverride
-
-# Windows
-ehthumbs.db
-Desktop.ini
-
-# Linux
-*~
-
-# Next.js (si lo usas)
-.next/
-out/
-
-# Nuxt (si lo usas)
-.nuxt/
-.nuxt-dist/
-
-# SvelteKit
-.svelte-kit/
-
-# Firebase
-.firebase/
-.firebaserc
-
-# Netlify
-.netlify/
-
-# Git-specific
-*.orig
-*.rej
-
-# Optional: Local SQLite DB or similar
+# ----------------------------------------
+# SQLite u otras bases locales
+# ----------------------------------------
 *.sqlite
-*.db
 *.sqlite3
+*.db
 
-# JetBrains
-.idea/
-*.iml
-
+# ----------------------------------------
 # TernJS
+# ----------------------------------------
 .tern-port
 
-# VS Code
-.history/
-*.code-workspace
-
-# COntenedores Log
-Server/logs
-
-#Python
-*.pyc
+# ----------------------------------------
+# Python (solo la ruta específica usada)
+# ----------------------------------------
+Server/volumes/backend-api/__pycache__/
+Server/volumes/backend-api/*.pyc

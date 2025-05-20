@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import HeaderMain from './HeaderMain';
 import Breadcrumbs from './Breadcrumbs';
-import { useLayoutStore } from '../../store/layoutStore';
+import { useNotificationStore } from '../../store/notificationStore';
 
 /**
  * Header - Componente principal del encabezado
  */
 export const Header = () => {
-  const { loadNotifications } = useLayoutStore();
+  const { loadNotifications } = useNotificationStore();
   
   // Cargar notificaciones al montar el componente
   useEffect(() => {

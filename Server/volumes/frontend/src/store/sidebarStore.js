@@ -1,35 +1,22 @@
-// src/store/sidebarStore.js
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 /**
- * Store para gestionar el estado del sidebar
+ * Store para gestionar el estado del sidebar con persistencia
  */
-export const useSidebarStore = create((set, get) => ({
-  // Estado
-  collapsed: false,
-  
-  // Acciones
-  toggleSidebar: () => set(state => ({ collapsed: !state.collapsed })),
-  setSidebarState: (collapsed) => set({ collapsed }),
-  
-  // Inicialización
-  initializeSidebar: () => {
-    try {
-      const savedState = localStorage.getItem('sidebar-collapsed');
-      if (savedState !== null) {
-        set({ collapsed: savedState === 'true' });
-      }
-    } catch (error) {
-      console.error('Error loading sidebar state:', error);
+export const useSidebarStore = create(
+  persist(
+    (set) => ({
+      // Estado
+      collapsed: false,
+      
+      // Acciones
+      toggleSidebar: () => set(state => ({ collapsed: !state.collapsed })),
+      setSidebarState: (collapsed) => set({ collapsed }),
+    }),
+    {
+      name: 'sidebar-storage', // nombre único para localStorage
+      storage: createJSONStorage(() => localStorage),
     }
-  },
-  
-  // Persistencia
-  saveSidebarState: () => {
-    try {
-      localStorage.setItem('sidebar-collapsed', get().collapsed.toString());
-    } catch (error) {
-      console.error('Error saving sidebar state:', error);
-    }
-  }
-}));
+  )
+);

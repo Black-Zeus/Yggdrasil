@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import MenuItem from './MenuItem';
-import { useLayoutStore } from '../../store/layoutStore';
+import { useSidebarStore } from '../../store/sidebarStore';
 import { useMenuStore } from '../../store/menuStore'; // ✅ importar el store
 
 /**
@@ -11,7 +11,7 @@ import { useMenuStore } from '../../store/menuStore'; // ✅ importar el store
  * @param {boolean} props.textVisible - Si el texto debe estar visible
  */
 const SidebarNavigation = ({ textVisible = true }) => {
-  const { collapsed } = useLayoutStore();
+  const { collapsed } = useSidebarStore();
   const location = useLocation();
   const { mainMenu, shortcuts, loadMenu } = useMenuStore(); // ✅ consumir el store
 
@@ -20,7 +20,7 @@ const SidebarNavigation = ({ textVisible = true }) => {
   }, [location.pathname]);
 
   return (
-    <div className="flex-1 py-4 overflow-y-auto">
+    <div className="flex-1 py-4 overflow-y-auto  overflow-x-hidden">
       {/* Main Menu Section */}
       <div className="mb-4 px-4">
         <ul className="menu">
