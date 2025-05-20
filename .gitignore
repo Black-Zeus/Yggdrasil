@@ -117,3 +117,6 @@ out/
 
 # COntenedores Log
 Server/logs
+
+#Python
+*.pyc
